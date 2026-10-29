@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+  <title>巨龙的宝库</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="game-shell">
+    <header class="title-bar">
+      <div>
+        <p class="eyebrow">宝石之战</p>
+        <h1>巨龙的宝库</h1>
+      </div>
+      <button id="rulesButton" class="icon-button" type="button" aria-label="查看规则">?</button>
+    </header>
+
+    <section class="arena" aria-label="对战角色">
+      <article class="fighter dragon-fighter">
+        <div class="portrait-wrap">
+          <img src="巨龙（主角）.jpeg" alt="冰霜巨龙" />
+          <span class="role-badge">守护者</span>
+        </div>
+        <div class="fighter-info">
+          <div class="name-row"><h2>巨龙</h2><strong id="dragonHp">10</strong></div>
+          <div class="hp-track" aria-label="巨龙生命值"><span id="dragonHpBar"></span></div>
+        </div>
+      </article>
+
+      <div class="versus">VS</div>
+
+      <article class="fighter hero-fighter">
+        <div class="portrait-wrap">
+          <img src="圣骑士（敌人）.jpeg" alt="圣骑士英雄" />
+          <span class="role-badge">挑战者</span>
+        </div>
+        <div class="fighter-info">
+          <div class="name-row"><h2>圣骑士</h2><strong id="heroHp">10</strong></div>
+          <div class="hp-track hero-hp" aria-label="圣骑士生命值"><span id="heroHpBar"></span></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="status-panel">
+      <div><span>第 <strong id="roundNumber">1</strong> / 5 局</span></div>
+      <div class="turn-pill" id="turnPill">轮到巨龙</div>
+      <div><span>宝石伤害 <strong>2</strong></span></div>
+    </section>
+
+    <section class="hand-section" aria-live="polite">
+      <div class="hand-heading">
+        <h2>你的石头</h2>
+        <span id="dragonStoneCount">5颗剩余</span>
+      </div>
+      <div id="dragonHand" class="stone-hand"></div>
+      <div class="target-choice" aria-label="攻击目标">
+        <button id="targetHero" class="target-button selected" type="button">攻击圣骑士</button>
+        <button id="targetSelf" class="target-button" type="button">攻击自己</button>
+      </div>
+      <button id="actionButton" class="action-button" type="button" disabled>选择一颗石头</button>
+    </section>
+
+    <section class="enemy-hands">
+      <div><span>英雄石头</span><strong id="heroStoneCount">5颗</strong></div>
+      <div id="heroStoneBacks" class="enemy-stones" aria-label="英雄剩余石头背面"></div>
+    </section>
+
+    <section class="log-panel">
+      <div class="log-heading"><h2>行动记录</h2><span id="roundHint">隐藏宝石 · 保持猜测</span></div>
+      <ol id="actionLog"></ol>
+    </section>
+
+    <dialog id="rulesDialog">
+      <form method="dialog">
+        <h2>宝库规则</h2>
+        <ul>
+          <li>巨龙与圣骑士各有 <strong>10 点生命</strong>。</li>
+          <li>每局双方各获得 <strong>5颗随机石头</strong>；魔法宝石至少 1颗，普通石头同样随机出现。</li>
+          <li>攻击对手时，宝石造成 <strong>2点伤害</strong>，普通石头不造成伤害，并立即交给对手。</li>
+          <li>攻击自己时，宝石会伤害自己并交给对手；普通石头不受伤且可以继续行动。</li>
+          <li>石头背面隐藏双方无法查看的真实类型。每局轮流行动，石头耗尽后进入下一局。</li>
+          <li>对局共 <strong>5局</strong>。生命归零立即获胜；5局结束后以生命值比较胜负，平手时判为平局。</li>
+        </ul>
+        <button class="action-button" value="close">知道了</button>
+      </form>
+    </dialog>
+
+    <dialog id="resultDialog">
+      <div class="result-content">
+        <div id="resultIcon" class="result-icon">♛</div>
+        <p class="eyebrow">对局结束</p>
+        <h2 id="resultTitle">巨龙获胜</h2>
+        <p id="resultText"></p>
+        <button id="restartButton" class="action-button" type="button">重新开始</button>
+      </div>
+    </dialog>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
